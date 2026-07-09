@@ -1,0 +1,41 @@
+* { box-sizing: border-box; }
+body { margin: 0; font-family: -apple-system, Segoe UI, Roboto, sans-serif; background: #0e0f14; color: #e8e8ea; }
+.page { max-width: 1100px; margin: 0 auto; padding: 32px 24px; }
+.page.center { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+h1 { margin-bottom: 4px; }
+.subtitle { color: #9a9aa6; margin-bottom: 20px; }
+.card { background: #171922; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.upload-card { max-width: 480px; text-align: center; }
+form { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
+input[type="file"] { padding: 10px; border-radius: 8px; border: 1px solid #2a2d3a; background: #0e0f14; color: #e8e8ea; }
+button { padding: 10px 16px; border-radius: 8px; border: none; background: #b13c3c; color: white; font-weight: 600; cursor: pointer; }
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+.error { color: #ff6b6b; }
+.phase-banner { display: flex; align-items: center; gap: 10px; color: #b3b3bd; }
+.badge { padding: 3px 10px; border-radius: 12px; font-size: 12px; text-transform: uppercase; background: #2a2d3a; }
+.phase-attacking { background: #6b3e1e; }
+.phase-debating { background: #4a3e6b; }
+.phase-judging { background: #1e5a6b; }
+.phase-complete { background: #1f6f43; }
+.phase-failed { background: #7a2323; }
+.agent-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 20px 0; }
+.agent-panel h3 { margin-top: 0; border-bottom: 1px solid #2a2d3a; padding-bottom: 8px; }
+.finding { padding: 8px 0; border-bottom: 1px solid #232634; font-size: 14px; }
+.finding-severity { font-size: 11px; color: #ff9d6b; font-weight: 700; margin-bottom: 2px; }
+.muted { color: #6f6f7a; font-style: italic; }
+.debate-turn { padding: 8px 0; border-bottom: 1px solid #232634; font-size: 14px; }
+.stance-support { border-left: 3px solid #3fae6b; padding-left: 10px; }
+.stance-challenge { border-left: 3px solid #d1494f; padding-left: 10px; }
+.stance-neutral { border-left: 3px solid #6f6f7a; padding-left: 10px; }
+.verdict-summary { display: flex; gap: 24px; align-items: center; }
+.risk-gauge { text-align: center; min-width: 140px; }
+.risk-score { font-size: 48px; font-weight: 800; color: #ff6b6b; }
+.filter-bar { margin-bottom: 12px; }
+select { padding: 6px 10px; border-radius: 6px; background: #171922; color: #e8e8ea; border: 1px solid #2a2d3a; }
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; padding: 10px; border-bottom: 1px solid #2a2d3a; vertical-align: top; }
+.sev-high { background: #7a2323; }
+.sev-mid { background: #6b5c1e; }
+.sev-low { background: #1f6f43; }
+.evidence-list { margin: 6px 0 0; padding-left: 18px; color: #9a9aa6; font-size: 13px; }
+.link-back { color: #8fb3ff; text-decoration: none; }
