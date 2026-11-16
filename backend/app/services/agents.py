@@ -60,18 +60,18 @@ quote a short verbatim excerpt (under 15 words) as evidence, and note where it a
 (section/paragraph description).
 
 Return ONLY a JSON object of this exact shape, no other text:
-{
+{{
   "findings": [
-    {
+    {{
       "claim": "<the vulnerability, one or two sentences>",
       "category": "<short category tag, e.g. 'burn rate', 'IP ownership', 'TAM inflation'>",
       "severity": <integer 1-10, 10 = existential risk>,
       "evidence_quote": "<verbatim excerpt, under 15 words>",
       "evidence_location": "<e.g. 'Section 2, paragraph 3'>",
       "confidence": <float 0-1>
-    }
+    }}
   ]
-}
+}}
 
 DOCUMENT:
 {document_text}

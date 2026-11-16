@@ -124,6 +124,13 @@ docker compose up --build
 # Dashboard: http://localhost:5173
 ```
 
+Tests (no API key or Postgres needed):
+
+```bash
+pip install -r backend/requirements-dev.txt
+python -m pytest backend/tests
+```
+
 ## 7. Scaling path
 - Swap `BackgroundTasks` for Celery+Redis once concurrent runs need to survive
   backend restarts or queue past available capacity.

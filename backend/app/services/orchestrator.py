@@ -154,6 +154,14 @@ async def run_pipeline(run_id: int):
         db.commit()
         findings = await _attack_phase(db, run, document_text)
 
+        if not findings:
+            msg = "No agent produced findings; check the model API key and logs"
+            run.status = "failed"
+            run.error_message = msg
+            db.commit()
+            await events.publish(run_id, {"phase": "failed", "error": msg})
+            return
+
         run.status = "debating"
         db.commit()
         await _debate_phase(db, run, findings)

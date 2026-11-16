@@ -12,6 +12,12 @@ class Settings(BaseSettings):
     max_upload_chars: int = 60_000         # truncate very large docs before sending to agents
     debate_top_n_per_agent: int = 3        # findings per agent carried into debate
 
+    cors_origins: str = "http://localhost:5173"  # comma-separated allowed origins
+
+    @property
+    def cors_origin_list(self) -> list[str]:
+        return [o.strip() for o in self.cors_origins.split(",") if o.strip()]
+
     class Config:
         env_file = ".env"
 
