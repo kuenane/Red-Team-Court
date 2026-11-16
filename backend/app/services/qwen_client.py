@@ -13,13 +13,23 @@ from ..config import settings
 
 logger = logging.getLogger(__name__)
 
-client = AsyncOpenAI(api_key=settings.dashscope_api_key, base_url=settings.dashscope_base_url)
+_client: AsyncOpenAI | None = None
+
+
+def get_client() -> AsyncOpenAI:
+    """Built lazily so the app can start (and tests can import it) without an API key."""
+    global _client
+    if _client is None:
+        if not settings.dashscope_api_key:
+            raise RuntimeError("DASHSCOPE_API_KEY is not set")
+        _client = AsyncOpenAI(api_key=settings.dashscope_api_key, base_url=settings.dashscope_base_url)
+    return _client
 
 
 async def chat_json(system_prompt: str, user_prompt: str, max_tokens: int = 2000) -> dict:
     """Calls Qwen expecting a strict JSON response. Returns {"ok": bool, "data"|"error": ...}."""
     try:
-        response = await client.chat.completions.create(
+        response = await get_client().chat.completions.create(
             model=settings.qwen_model,
             max_tokens=max_tokens,
             temperature=0.4,

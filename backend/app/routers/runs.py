@@ -48,12 +48,20 @@ async def run_events(run_id: int, request: Request, db: Session = Depends(get_db
     if not run:
         raise HTTPException(404, "run not found")
 
+    # Subscribe first, then read status, so no event can fall between the two.
     queue = events.subscribe(run_id)
+    db.refresh(run)
+    status = run.status
+    terminal = {"phase": status, "overall_risk_score": float(run.overall_risk_score) if run.overall_risk_score is not None else None,
+                "executive_summary": run.executive_summary, "error": run.error_message}
 
     async def event_generator():
         try:
             # Replay current status immediately so late subscribers aren't lost
-            yield {"event": "status", "data": json.dumps({"status": run.status})}
+            yield {"event": "status", "data": json.dumps({"status": status})}
+            if status in ("complete", "failed"):
+                yield {"event": "update", "data": json.dumps(terminal)}
+                return
             while True:
                 if await request.is_disconnected():
                     break
